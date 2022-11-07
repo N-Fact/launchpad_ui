@@ -25,7 +25,6 @@ import ScrollToTop from "./ScrollToTop";
 import { Page } from "./types";
 
 
-
 export const pages: Page[] = [
   { path: "/", component: PageHome },
   { path: "/#", component: PageHome },
@@ -55,7 +54,6 @@ const MyRoutes = () => {
 
   useEffect(() => {
     if (connected) {
-
       if (sessionStorage.getItem('firstConnected') === 'true') {
         sessionStorage.setItem('firstConnected', "false");
         // axios post
@@ -64,18 +62,23 @@ const MyRoutes = () => {
         })
           .then((response) => {
             if (response.data.status === "false") {
+              const Random = Math.floor(100000 + Math.random() * 900000);
+
               axios.post("https://blockchain.novemyazilim.com/api/v1/user", {
                 "wallet_address": account?.address,
                 "public_key": account?.publicKey,
-                "wallet_name": wallet?.adapter.name
+                "wallet_name": wallet?.adapter.name,
+                "name": "dktools-" + Random,
               }).then(response => {
                 if (response.data.status === "false") {
                   disconnect();
                 } else {
-                  console.log(response.data);
+                  // sessionStorage.setItem("user", JSON.stringify(response.data.data));
                 }
               });
             } else {
+              // sessionStorage.setItem("user", JSON.stringify(response.data.data));
+
             }
           });
       }

@@ -1,7 +1,7 @@
 import { Popover, Transition } from "@headlessui/react";
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import { avatarImgs } from "contains/fakeData";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import Avatar from "shared/Avatar/Avatar";
 
@@ -17,8 +17,11 @@ function truncate(text: string, startChars: any, endChars: number, maxLength: nu
   return text;
 }
 
+
 export default function AvatarDropdown() {
-  const { account, wallet, disconnect, ...rest } = useWallet();
+  const { connected, account, wallet, disconnect, ...rest } = useWallet();
+  const [user, setuser] = useState(null)
+
   return (
     <div className="AvatarDropdown">
       <Popover className="relative">
@@ -48,8 +51,8 @@ export default function AvatarDropdown() {
                       <Avatar imgUrl={avatarImgs[7]} sizeClass="w-12 h-12" />
 
                       <div className="flex-grow">
-                        <h4 className="font-semibold">Dwarf</h4>
-                        <p className="text-xs mt-0.5">{truncate(account?.address + "", 10, 10, 24)}</p>
+                        <h4 className="font-semibold"></h4>
+                        {/* <p className="text-xs mt-0.5">{truncate(JSON.parse(sessionStorage.user).wallet_address + "", 10, 10, 24)}</p> */}
 
                       </div>
                     </div>

@@ -1,6 +1,6 @@
-import { MartianWalletName, PontemWalletName, useWallet } from '@manahippo/aptos-wallet-adapter';
+import { AptosWalletName, MartianWalletName, useWallet } from '@manahippo/aptos-wallet-adapter';
 import martian from "images/icons/martian.svg";
-import pontem from "images/icons/pontem.png";
+import petra from "images/icons/petra.png";
 import toast from 'react-hot-toast';
 
 const WalletModal = () => {
@@ -24,7 +24,7 @@ const WalletModal = () => {
   }
 
   function connectPontem() {
-    connect(PontemWalletName);
+    connect(AptosWalletName);
   }
 
   return (
@@ -40,8 +40,8 @@ const WalletModal = () => {
         </li>
         <li>
           <a href='#' onClick={connectPontem} className="flex w-full items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-neutral-900 dark:hover:bg-zinc-900 shadow-md dark:text-white">
-            <img width={35} src={pontem} />
-            <span className="flex-1 ml-3 inline-flex whitespace-nowrap">Pontem Wallet</span>
+            <img width={40} src={petra} />
+            <span className="flex-1 ml-3 inline-flex whitespace-nowrap">Petra Wallet</span>
           </a>
         </li>
 

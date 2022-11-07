@@ -2,7 +2,6 @@ import { useWallet } from '@manahippo/aptos-wallet-adapter';
 import WalletModal from 'components/modals/walletModal/WalletModal';
 import { FC, useState } from "react";
 import { Link } from "react-router-dom";
-import ButtonSecondary from "shared/Button/ButtonSecondary";
 import Logo from "shared/Logo/Logo";
 import MenuBar from "shared/MenuBar/MenuBar";
 import Navigation from "shared/Navigation/Navigation";
@@ -34,14 +33,13 @@ const MainNav2: FC<MainNav2Props> = () => {
         <div className="flex-shrink-0 flex items-center justify-end text-neutral-700 dark:text-neutral-100 space-x-1">
           <div className="hidden items-center xl:flex space-x-2">
             <Navigation />
-            <div className="hidden sm:block h-10 border-l border-neutral-300 dark:border-neutral-6000"></div>
+            <div className="hidden sm:block h-10 border-l border-neutral-300 dark:border-neutral-6000 pl-4"></div>
 
-            <ButtonSecondary
+            <button className='connect-wallet-btn'
               onClick={connectWallet}
-              sizeClass="px-4 py-2 sm:px-5"
             >
               Connect Wallet
-            </ButtonSecondary>
+            </button>
           </div>
           <div className="flex items-center space-x-1.5 xl:hidden">
             <MenuBar />

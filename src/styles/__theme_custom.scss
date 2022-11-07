@@ -23,9 +23,16 @@
   border-bottom: #3f2f29 solid 1px;
 }
 .connect-wallet-btn {
-  background: #ad835a !important;
-  color: white !important;
-  border: none !important;
+  background: #ad835a;
+  color: white;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 8px;
+  transition: 0.5s;
+  &:hover {
+    background: #ad835a9f;
+    color: white;
+  }
 }
 .logo-text {
   font-family: cinzel;
@@ -445,4 +452,8 @@ input[type="time"]::-webkit-calendar-picker-indicator {
       transform: rotate(180deg);
     }
   }
+}
+
+.bg-primary-main {
+  background-color: #ad835a;
 }

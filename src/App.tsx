@@ -39,7 +39,6 @@ const App: React.FC = () => {
       }
       }>
       <Toaster />
-
       <div className="text-base text-neutral-900 dark:text-neutral-200 bg-dwarf">
         <MyRouter />
       </div>
