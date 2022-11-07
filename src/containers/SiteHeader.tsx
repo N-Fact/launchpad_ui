@@ -1,11 +1,21 @@
 import Header2 from "components/Header/Header2";
+import HeaderLogged from "components/Header/HeaderLogged";
+import { FC } from "react";
 import { useLocation } from "react-router-dom";
 
-const SiteHeader = () => {
+export interface SiteHeaderProps {
+  connected: boolean;
+}
+
+const SiteHeader: FC<SiteHeaderProps> = (connected) => {
   let location = useLocation();
 
-  // return location.pathname !== "/" ? <Header2 /> : <HeaderLogged />;
-  return <Header2 />
+  if (connected.connected) {
+    return <HeaderLogged />
+  } else {
+    return <Header2 />
+  }
+  // return <Header2 />
 };
 
 export default SiteHeader;

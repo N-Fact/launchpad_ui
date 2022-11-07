@@ -1,3 +1,5 @@
+import { useWallet } from "@manahippo/aptos-wallet-adapter";
+import axios from "axios";
 import AccountPage from "containers/AccountPage/AccountPage";
 import AuthorPage from "containers/AuthorPage/AuthorPage";
 import BlogPage from "containers/BlogPage/BlogPage";
@@ -16,10 +18,13 @@ import PageSignUp from "containers/PageSignUp/PageSignUp";
 import PageSubcription from "containers/PageSubcription/PageSubcription";
 import PageUploadItem from "containers/PageUploadItem";
 import SiteHeader from "containers/SiteHeader";
+import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "shared/Footer/Footer";
 import ScrollToTop from "./ScrollToTop";
 import { Page } from "./types";
+
+
 
 export const pages: Page[] = [
   { path: "/", component: PageHome },
@@ -46,12 +51,43 @@ export const pages: Page[] = [
 ];
 
 const MyRoutes = () => {
+  const { disconnect, wallet, autoConnect, select, connect, connected, account, ...rest } = useWallet();
+
+  useEffect(() => {
+    if (connected) {
+
+      if (sessionStorage.getItem('firstConnected') === 'true') {
+        sessionStorage.setItem('firstConnected', "false");
+        // axios post
+        axios.post("https://blockchain.novemyazilim.com/api/v1/user/login", {
+          "wallet_address": account?.address,
+        })
+          .then((response) => {
+            if (response.data.status === "false") {
+              axios.post("https://blockchain.novemyazilim.com/api/v1/user", {
+                "wallet_address": account?.address,
+                "public_key": account?.publicKey,
+                "wallet_name": wallet?.adapter.name
+              }).then(response => {
+                if (response.data.status === "false") {
+                  disconnect();
+                } else {
+                  console.log(response.data);
+                }
+              });
+            } else {
+            }
+          });
+      }
+    }
+  }, [account, connected]);
+
   return (
     <BrowserRouter
       basename={process.env.NODE_ENV === "production" ? "" : ""}
     >
       <ScrollToTop />
-      <SiteHeader />
+      <SiteHeader connected={connected} />
       <Routes>
         {pages.map(({ component, path }) => {
           const Component = component;
