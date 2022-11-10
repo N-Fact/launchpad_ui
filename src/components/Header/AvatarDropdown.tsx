@@ -1,8 +1,8 @@
 import { Popover, Transition } from "@headlessui/react";
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import { avatarImgs } from "contains/fakeData";
-import { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Fragment } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Avatar from "shared/Avatar/Avatar";
 
 function truncate(text: string, startChars: any, endChars: number, maxLength: number) {
@@ -18,9 +18,11 @@ function truncate(text: string, startChars: any, endChars: number, maxLength: nu
 }
 
 
-export default function AvatarDropdown() {
+export default function AvatarDropdown(user: any) {
   const { connected, account, wallet, disconnect, ...rest } = useWallet();
-  const [user, setuser] = useState(null)
+  let navigate = useNavigate();
+
+  // const [user, setuser] = useState(null)
 
   return (
     <div className="AvatarDropdown">
@@ -31,7 +33,7 @@ export default function AvatarDropdown() {
               className={`inline-flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
             >
               <Avatar
-                imgUrl={avatarImgs[7]}
+                imgUrl={user.user.avatar != null ? user.user.avatar : avatarImgs[0]}
                 sizeClass="w-8 h-8 sm:w-9 sm:h-9"
               />
             </Popover.Button>
@@ -48,11 +50,11 @@ export default function AvatarDropdown() {
                 <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6">
                     <div className="flex items-center space-x-3">
-                      <Avatar imgUrl={avatarImgs[7]} sizeClass="w-12 h-12" />
+                      <Avatar imgUrl={user.user.avatar != null ? user.user.avatar : avatarImgs[0]} sizeClass="w-12 h-12" />
 
                       <div className="flex-grow">
-                        <h4 className="font-semibold"></h4>
-                        {/* <p className="text-xs mt-0.5">{truncate(JSON.parse(sessionStorage.user).wallet_address + "", 10, 10, 24)}</p> */}
+                        <h4 className="font-semibold">{user.user.name}</h4>
+                        <p className="text-xs mt-0.5">{truncate(user.user.wallet_address + "", 10, 10, 24)}</p>
 
                       </div>
                     </div>
@@ -117,6 +119,8 @@ export default function AvatarDropdown() {
                     <button
                       onClick={() => {
                         disconnect();
+                        sessionStorage.removeItem("id");
+                        navigate("/");
                       }}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                     >

@@ -18,7 +18,8 @@ import PageSignUp from "containers/PageSignUp/PageSignUp";
 import PageSubcription from "containers/PageSubcription/PageSubcription";
 import PageUploadItem from "containers/PageUploadItem";
 import SiteHeader from "containers/SiteHeader";
-import { useEffect } from "react";
+import StateProvider from "context/StateProvider";
+import { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "shared/Footer/Footer";
 import ScrollToTop from "./ScrollToTop";
@@ -51,8 +52,10 @@ export const pages: Page[] = [
 
 const MyRoutes = () => {
   const { disconnect, wallet, autoConnect, select, connect, connected, account, ...rest } = useWallet();
+  const { user, setUser } = useContext(StateProvider);
 
   useEffect(() => {
+
     if (connected) {
       if (sessionStorage.getItem('firstConnected') === 'true') {
         sessionStorage.setItem('firstConnected', "false");
@@ -73,17 +76,20 @@ const MyRoutes = () => {
                 if (response.data.status === "false") {
                   disconnect();
                 } else {
-                  // sessionStorage.setItem("user", JSON.stringify(response.data.data));
+                  setUser(response.data.data);
+                  sessionStorage.setItem('id', response.data.data.id);
                 }
               });
             } else {
-              // sessionStorage.setItem("user", JSON.stringify(response.data.data));
+              console.log(response.data.data);
 
+              setUser(response.data.data);
+              sessionStorage.setItem('id', response.data.data.id);
             }
           });
       }
     }
-  }, [account, connected]);
+  }, [account, connected, user]);
 
   return (
     <BrowserRouter

@@ -1,8 +1,8 @@
 import { avatarColors } from "contains/contants";
-import React, { FC } from "react";
+import { FC } from "react";
 
-import { avatarImgs } from "contains/fakeData";
 import VerifyIcon from "components/VerifyIcon";
+import { avatarImgs } from "contains/fakeData";
 
 export interface AvatarProps {
   containerClassName?: string;
@@ -12,6 +12,7 @@ export interface AvatarProps {
   userName?: string;
   hasChecked?: boolean;
   hasCheckedClass?: string;
+  id?: string;
 }
 
 const Avatar: FC<AvatarProps> = ({
@@ -22,6 +23,7 @@ const Avatar: FC<AvatarProps> = ({
   userName,
   hasChecked,
   hasCheckedClass = "w-4 h-4 bottom-1 -right-0.5",
+  id
 }) => {
   const url = imgUrl || "";
   const name = userName || "John Doe";
@@ -42,6 +44,7 @@ const Avatar: FC<AvatarProps> = ({
           className={`absolute inset-0 w-full h-full object-cover ${radius}`}
           src={url}
           alt={name}
+          id={id}
         />
       )}
       <span className="wil-avatar__name">{name[0]}</span>

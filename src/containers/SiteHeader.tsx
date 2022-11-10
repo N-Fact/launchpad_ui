@@ -1,6 +1,7 @@
 import Header2 from "components/Header/Header2";
 import HeaderLogged from "components/Header/HeaderLogged";
-import { FC } from "react";
+import StateProvider from "context/StateProvider";
+import { FC, useContext } from "react";
 import { useLocation } from "react-router-dom";
 
 export interface SiteHeaderProps {
@@ -9,8 +10,10 @@ export interface SiteHeaderProps {
 
 const SiteHeader: FC<SiteHeaderProps> = (connected) => {
   let location = useLocation();
+  const { user, setUser } = useContext(StateProvider);
 
-  if (connected.connected) {
+  if (connected.connected && user != null) {
+
     return <HeaderLogged />
   } else {
     return <Header2 />

@@ -24,7 +24,20 @@ const WalletModal = () => {
   }
 
   function connectPontem() {
-    connect(AptosWalletName);
+    connect(AptosWalletName).then((e) => {
+      toast.success("Connected to Pontem Wallet",
+        {
+          duration: 3000,
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          },
+        }
+      );
+      sessionStorage.setItem('firstConnected', "true");
+
+    });
   }
 
   return (

@@ -1,4 +1,5 @@
-import { FC } from "react";
+import StateProvider from "context/StateProvider";
+import { FC, useContext } from "react";
 import { Link } from "react-router-dom";
 import Logo from "shared/Logo/Logo";
 import Navigation from "shared/Navigation/Navigation";
@@ -8,7 +9,7 @@ import NotifyDropdown from "./NotifyDropdown";
 export interface MainNav2LoggedProps { }
 
 const MainNav2Logged: FC<MainNav2LoggedProps> = () => {
-
+  const { user, setUser } = useContext(StateProvider);
 
   return (
     <div className={`nc-MainNav2Logged relative z-10 ${"onTop "}`}>
@@ -28,11 +29,11 @@ const MainNav2Logged: FC<MainNav2LoggedProps> = () => {
             </div>
             <div></div>
             <div></div>
-            <AvatarDropdown />
+            <AvatarDropdown user={user} />
           </div>
           <div className="flex items-center space-x-3 xl:hidden">
             <NotifyDropdown />
-            <AvatarDropdown />
+            <AvatarDropdown user={user} />
           </div>
         </div>
       </div>

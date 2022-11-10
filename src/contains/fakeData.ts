@@ -1,3 +1,4 @@
+import blank from "images/avatars/blank.png";
 import avatar1 from "images/avatars/Image-1.png";
 import avatar10 from "images/avatars/Image-10.png";
 import avatar2 from "images/avatars/Image-2.png";
@@ -97,6 +98,7 @@ export const nftsAbstracts = [
 ];
 
 export const avatarImgs = [
+  blank,
   avatar1,
   avatar2,
   avatar3,

@@ -14,9 +14,10 @@ export interface CardNFTProps {
   price?: string;
   totalitems?: string;
   isEnd?: boolean;
+  linkTo?: string;
 }
 
-const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, items = "0", title = "", price = "0", totalitems = "1000", isEnd = false }) => {
+const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, items = "0", title = "", price = "0", totalitems = "1000", isEnd = false, linkTo = "/nft-detail/4" }) => {
   const renderAvatars = () => {
     return (
       <div className="flex -space-x-1 ">
@@ -89,7 +90,7 @@ const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, items = "0", title
         </div>
       </div>
 
-      <Link to={"/nft-detail/4"} className="absolute inset-0"></Link>
+      <Link to={linkTo} className="absolute inset-0"></Link>
     </div>
   );
 };
