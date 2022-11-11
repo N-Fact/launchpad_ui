@@ -3,26 +3,28 @@ import { FC, useState } from "react";
 
 export interface SectionLargeSliderProps {
   className?: string;
+  projects?: Array<any>;
 }
 
 const SectionLargeSlider: FC<SectionLargeSliderProps> = ({
   className = "",
+  projects = null,
 }) => {
   const [indexActive, setIndexActive] = useState(0);
-
+  const projectLength = projects?.length ? projects?.length : 0;
   const handleClickNext = () => {
     setIndexActive((state) => {
-      if (state >= 2) {
+      if (state >= projectLength - 1) {
         return 0;
       }
       return state + 1;
     });
   };
-
+  console.log(indexActive);
   const handleClickPrev = () => {
     setIndexActive((state) => {
       if (state === 0) {
-        return 2;
+        return projectLength - 1;
       }
       return state - 1;
     });
@@ -30,22 +32,16 @@ const SectionLargeSlider: FC<SectionLargeSliderProps> = ({
 
   return (
     <div className={`nc-SectionLargeSlider relative ${className}`}>
-      {[1, 1, 1].map((_, index) =>
+
+
+      {projects?.map((project, index) =>
         indexActive === index ? (
           <CardLarge2
             key={index}
             onClickNext={handleClickNext}
             onClickPrev={handleClickPrev}
+            project={project}
           />
-
-
-          // <CardLarge1
-          //   key={index}
-          //   isShowing
-          //   featuredImgUrl={nftsLargeImgs[index]}
-          //   onClickNext={handleClickNext}
-          //   onClickPrev={handleClickPrev}
-          // />
         ) : null
       )}
     </div>

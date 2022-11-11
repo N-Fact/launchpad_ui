@@ -1,4 +1,3 @@
-import { nftsImgs } from "contains/fakeData";
 import { FC } from "react";
 import Avatar from "shared/Avatar/Avatar";
 import Button from "shared/Button/Button";
@@ -15,6 +14,17 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
   className = "",
   project = null,
 }) => {
+  let noData;
+  console.log(project);
+  if (project?.rounds?.length == 0) {
+    noData = (
+      <div className="rounded-2xl gap-6 flex flex-col shadow-md border border-neutral-50 dark:border-neutral-800 hover:bg-zinc-900 duration-500 p-2 lg:p-3 items-start">
+        <div className="flex w-full justify-center">
+          <h2 className="text-2xl">  There are no rounds</h2>
+        </div>
+      </div>
+    );
+  }
   return (
     <div
       className={`nc-CardLarge2  ${className}`}
@@ -28,7 +38,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
           <div className="flex flex-grow flex-col sm:flex-row md:block sm:items-start sm:justify-between">
             <div className="">
               <NcImage
-                src={nftsImgs[2]}
+                src={"https://novemyazilim.com/blockchain/public/" + project?.image}
                 containerClassName="aspect-w-1 aspect-h-1 rounded-[15px] overflow-hidden"
               />
               <div className="mt-4">
@@ -43,19 +53,19 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
             </div>
             <div className="mt-4 flex items-center sm:justify-center space-x-3">
               <div className="flex space-x-1.5 text-neutral-700 dark:text-neutral-300">
-                <a
+                <a target="_blank"
                   href={project?.user?.website}
                   className="w-8 h-8 md:w-10 md:h-10 flex items-center  justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-700 dark:bg-neutral-800 cursor-pointer"
                 >
                   <i className="las la-globe text-base sm:text-xl"></i>
                 </a>
-                <a
+                <a target="_blank"
                   href={project?.user?.discord}
                   className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-700 dark:bg-neutral-800 cursor-pointer"
                 >
                   <i className="text-base sm:text-xl lab la-discord"></i>
                 </a>
-                <a
+                <a target="_blank"
                   href={project?.user?.twitter}
                   className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-700 dark:bg-neutral-800 cursor-pointer"
                 >
@@ -92,6 +102,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
                 </span>
               </div>
               <div className="mt-6 xl:mt-8 gap-4 flex flex-col">
+                {noData}
                 {
                   project?.rounds?.map((round: any, index: number) => {
                     if (round.status == 0) {

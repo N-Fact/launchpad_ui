@@ -1,8 +1,6 @@
 import { ClockIcon } from "@heroicons/react/outline";
-import { nftsImgs } from "contains/fakeData";
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import Avatar from "shared/Avatar/Avatar";
 import NcImage from "shared/NcImage/NcImage";
 import Prices from "./Prices";
 
@@ -11,35 +9,19 @@ export interface CardNFTProps {
   isLiked?: boolean;
   title?: string;
   items?: number;
-  price?: string;
+  price?: any;
   totalitems?: string;
   isEnd?: boolean;
   linkTo?: string;
+  image?: string;
 }
 
-const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, items = "0", title = "", price = "0", totalitems = "1000", isEnd = false, linkTo = "/nft-detail/4" }) => {
-  const renderAvatars = () => {
-    return (
-      <div className="flex -space-x-1 ">
-        <Avatar
-          containerClassName="ring-2 ring-white dark:ring-neutral-900"
-          sizeClass="h-5 w-5 text-sm"
-        />
-        <Avatar
-          containerClassName="ring-2 ring-white dark:ring-neutral-900"
-          sizeClass="h-5 w-5 text-sm"
-        />
-        <Avatar
-          containerClassName="ring-2 ring-white dark:ring-neutral-900"
-          sizeClass="h-5 w-5 text-sm"
-        />
-        <Avatar
-          containerClassName="ring-2 ring-white dark:ring-neutral-900"
-          sizeClass="h-5 w-5 text-sm"
-        />
-      </div>
-    );
-  };
+const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, items = "0", title = "", price = [], totalitems = "1000", isEnd = false, linkTo = "/nft-detail/4", image = "" }) => {
+
+  let publicPrice = price.filter((item: any) => {
+    return item.name == "Public";
+  });
+
 
   return (
     <div
@@ -50,7 +32,7 @@ const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, items = "0", title
         <div>
           <NcImage
             containerClassName="flex aspect-w-11 aspect-h-12 w-full h-0 rounded-[15px] overflow-hidden z-0"
-            src={nftsImgs[Math.floor(Math.random() * nftsImgs.length)]}
+            src={"https://novemyazilim.com/blockchain/public/" + image}
             className="object-cover w-full h-full group-hover:scale-[1.03] transition-transform duration-300 ease-in-out will-change-transform"
           />
         </div>
@@ -79,7 +61,7 @@ const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, items = "0", title
         <div className="w-2d4 w-full border-b border-neutral-100 dark:border-neutral-700"></div>
 
         <div className="flex justify-between items-end ">
-          <Prices price={price} labelTextClassName="bg-white dark:bg-neutral-900 dark:group-hover:bg-neutral-800 group-hover:bg-neutral-50" />
+          <Prices price={publicPrice[0]?.price} labelTextClassName="bg-white dark:bg-neutral-900 dark:group-hover:bg-neutral-800 group-hover:bg-neutral-50" />
           <div className="flex items-center text-sm text-neutral-500 dark:text-neutral-400">
 
             {isEnd ? "" : <ClockIcon className="w-4 h-4" />}

@@ -25,11 +25,10 @@ import Footer from "shared/Footer/Footer";
 import ScrollToTop from "./ScrollToTop";
 import { Page } from "./types";
 
-
 export const pages: Page[] = [
   { path: "/", component: PageHome },
   { path: "/#", component: PageHome },
-  { path: "/nft-detail/:id", component: NftDetailPage },
+  { path: "/nft-detail/:slug", component: NftDetailPage },
 
 
   { path: "/home2", component: PageHome },

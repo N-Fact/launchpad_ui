@@ -7,7 +7,7 @@ export interface NftDetailPageProps {
   className?: string;
 }
 const client = axios.create({
-  baseURL: "https://blockchain.novemyazilim.com/api/v1/event/"
+  baseURL: "https://blockchain.novemyazilim.com/api/v1/event/slug/"
 });
 
 const NftDetailPage: FC<NftDetailPageProps> = ({ className = "", }) => {
@@ -15,7 +15,7 @@ const NftDetailPage: FC<NftDetailPageProps> = ({ className = "", }) => {
   const [Project, setProject] = useState("")
   useEffect(() => {
     async function getProjet() {
-      const response = await client.get("" + params.id);
+      const response = await client.get("" + params.slug);
       setProject(response.data);
     }
     getProjet()

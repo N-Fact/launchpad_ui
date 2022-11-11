@@ -12,22 +12,33 @@ const client = axios.create({
 const clientEnded = axios.create({
   baseURL: "https://blockchain.novemyazilim.com/api/v1/eventEnd"
 });
+const clientHighlights = axios.create({
+  baseURL: "https://blockchain.novemyazilim.com/api/v1/eventHighlights"
+});
 
 function PageHome() {
   const [projects, setprojects] = useState();
   const [endedProjects, setEndedprojects] = useState();
+  const [highProjects, setHighprojects] = useState();
 
   useEffect(() => {
     async function getPost() {
       const response = await client.get("");
       setprojects(response.data);
     }
+
+    async function getHighlights() {
+      const response = await clientHighlights.get("");
+      setHighprojects(response.data);
+    }
+
     async function getPostEnded() {
       const response = await clientEnded.get("");
       setEndedprojects(response.data);
     }
     getPost();
     getPostEnded();
+    getHighlights();
   }, []);
   return (
     <div className="nc-PageHome relative overflow-hidden">
@@ -38,7 +49,7 @@ function PageHome() {
       {/* SECTION LAERGE SLIDER */}
       <div className="py-20 lg:py-32">
         <div className="container">
-          <SectionLargeSlider />
+          <SectionLargeSlider projects={highProjects} />
         </div>
       </div>
       <DividerDwarf />

@@ -1,7 +1,6 @@
 import CardNFT from "components/CardNFT";
 import Heading from "components/Heading/Heading";
 import { FC } from "react";
-import Pagination from "shared/Pagination/Pagination";
 
 //buraya hook ile apiden data cekilecek
 export interface SectionGridFeatureNFTProps {
@@ -18,14 +17,14 @@ const SectionGridFeatureNFT: FC<SectionGridFeatureNFTProps> = ({ title = "", pro
       >
         {
           projects?.map((project, index) => (
-            <CardNFT linkTo={"/nft-detail/" + project.id} key={index} title={project.title} items={project.total_supply} price={"5"} isEnd={false} />
+            <CardNFT linkTo={"/nft-detail/" + project.slug} image={project.image} key={index} title={project.title} items={project.total_supply} price={project.rounds} isEnd={false} />
           ))
         }
       </div>
       {/* PAGINATION */}
-      <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-center sm:items-center">
+      {/* <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-center sm:items-center">
         <Pagination />
-      </div>
+      </div> */}
     </div>
 
   );
