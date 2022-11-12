@@ -16,7 +16,6 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
 }) => {
   let noData;
   console.log(project);
-  console.log(project?.image);
   if (project?.rounds?.length == 0) {
     noData = (
       <div className="rounded-2xl gap-6 flex flex-col shadow-md border border-neutral-50 dark:border-neutral-800 hover:bg-zinc-900 duration-500 p-2 lg:p-3 items-start">
@@ -170,6 +169,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
                             <span className="font-sm text-base rounded">
                               {round.mintbywallet} Mint per wallet <br /><b> Price: <span className="text-green-600">{round.price} $APT</span></b>
                             </span>
+                            <div style={{ width: "150px" }}></div>
                             <TimeCountDown eventDate={round.event_date} />
                           </div>
                         </div>

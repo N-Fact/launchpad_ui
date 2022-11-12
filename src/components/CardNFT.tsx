@@ -38,11 +38,11 @@ const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, title = "", rounds
   const timeLeft = useRemainingTime(publicRound[0]?.event_date);
   let timeLeftString: any;
   if (timeLeft.days == 0 && timeLeft.hours > 0) {
-    timeLeftString = timeLeft.hours + " Hours left";
+    timeLeftString = timeLeft.hours + " Hours";
   } else if (timeLeft.days > 0 && timeLeft.hours > 0) {
-    timeLeftString = timeLeft.days + " Day " + timeLeft.hours + " Hour left";
+    timeLeftString = timeLeft.days + " Day " + timeLeft.hours + " Hour";
   } else if (timeLeft.days > 0 && timeLeft.hours == 0) {
-    timeLeftString = timeLeft.days + " Day left";
+    timeLeftString = timeLeft.days + " Day";
   }
 
   return (
