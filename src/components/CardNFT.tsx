@@ -21,7 +21,7 @@ const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, title = "", rounds
 
   let supplyStatus: any;
 
-  if (supply > 0 && isEnd == true) {
+  if (supply >= 0 && isEnd == true) {
     supplyStatus = <span className="text-red-500">{supply} / {totalitems}</span>;
   } else if (supply >= totalitems) {
     supplyStatus = <span className="text-red-500">{supply} / {totalitems}</span>;
