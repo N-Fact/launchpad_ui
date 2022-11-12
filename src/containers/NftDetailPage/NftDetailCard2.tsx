@@ -16,6 +16,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
 }) => {
   let noData;
   console.log(project);
+  console.log(project?.image);
   if (project?.rounds?.length == 0) {
     noData = (
       <div className="rounded-2xl gap-6 flex flex-col shadow-md border border-neutral-50 dark:border-neutral-800 hover:bg-zinc-900 duration-500 p-2 lg:p-3 items-start">
@@ -75,7 +76,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
 
             </div>
           </div>
-          <div className="mt-5 md:mt-0 md:ml-8 xl:ml-14 w-5/12">
+          <div className="mt-5 md:mt-0 md:ml-8 xl:ml-14">
             <div className="max-w-screen-sm">
               <h2 className="inline-block text-2xl sm:text-3xl lg:text-5xl font-semibold mb-2">
                 {project?.title}
@@ -156,7 +157,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
                         <div key={index} className="rounded-2xl gap-6 flex flex-col shadow-md border border-neutral-50 dark:border-neutral-800 hover:bg-zinc-900 duration-500 p-2 lg:p-3 items-start">
                           <div className="flex w-full">
                             <span className="text-xs shadow-md text-white rounded-full bg-slate-800 py-1 px-2">
-                              Public
+                              {round.name}
                             </span>
                             <span className="text-xs shadow-md text-white rounded-full bg-slate-800 py-1 px-2 ml-2">
                               Items : {round.item_count}

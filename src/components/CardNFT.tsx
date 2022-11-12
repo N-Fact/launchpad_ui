@@ -9,16 +9,28 @@ export interface CardNFTProps {
   className?: string;
   isLiked?: boolean;
   title?: string;
-  items?: number;
   rounds?: any;
   totalitems?: string;
   isEnd?: boolean;
   linkTo?: string;
   image?: string;
   remainingTime?: any;
+  supply?: any;
 }
 
-const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, items = "0", title = "", rounds = [], totalitems = "1000", isEnd = false, linkTo = "/nft-detail/4", image = "", remainingTime = 4 }) => {
+const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, title = "", rounds = [], totalitems = "1000", isEnd = false, linkTo = "/nft-detail/4", image = "", remainingTime = 4, supply = 0 }) => {
+
+  let supplyStatus: any;
+
+  if (supply > 0 && isEnd == true) {
+    supplyStatus = <span className="text-red-500">{supply} / {totalitems}</span>;
+  } else if (supply >= totalitems) {
+    supplyStatus = <span className="text-red-500">{supply} / {totalitems}</span>;
+  } else if (supply >= 0 && isEnd == false) {
+    supplyStatus = <span className=""> {totalitems} items</span>;
+  } else {
+    supplyStatus = <span className=""> {totalitems} items</span>;
+  }
 
   let publicRound = rounds.filter((item: any) => {
     return item.name == "Public";
@@ -60,9 +72,7 @@ const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, items = "0", title
             {title}
           </h2>
           <span className="ml-auto text-neutral-700 dark:text-neutral-400 text-xs">
-            {
-              items == 0 ? <span className="text-red-500">{items} / {totalitems}</span> : <span className=""> {totalitems} items</span>
-            }
+            {supplyStatus}
           </span>
         </div>
 
@@ -75,7 +85,7 @@ const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, items = "0", title
 
             {isEnd ? "" : <ClockIcon className="w-4 h-4" />}
             <span className="ml-1 mt-0.5">
-              {isEnd ? "Sold out" : timeLeftString}
+              {isEnd ? supply >= totalitems ? 'Sold Out' : '' : timeLeftString}
             </span>
           </div>
         </div>

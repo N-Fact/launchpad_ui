@@ -21,7 +21,6 @@ const NftDetailPage: FC<NftDetailPageProps> = ({ className = "", }) => {
     getProjet()
   }, [])
 
-
   return (
     <div className="nc-PageHome relative overflow-hidden">
       {/* SECTION LAERGE SLIDER */}

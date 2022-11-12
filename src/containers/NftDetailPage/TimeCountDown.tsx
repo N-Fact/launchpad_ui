@@ -5,7 +5,7 @@ const TimeCountDown = (eventDate: any) => {
 
   return (
     <div className="space-y-5">
-      <div className="flex space-x-3 ">
+      <div className="flex space-x-1 ">
         <div className="flex flex-col ">
           <span className="text-sm font-semibold">
             {timeLeft.days}
@@ -27,14 +27,14 @@ const TimeCountDown = (eventDate: any) => {
             {timeLeft.minutes}
           </span>
           <span className="text-xs text-neutral-500 dark:text-neutral-400">
-            minutes
+            min
           </span>
         </div>
         <div className="flex flex-col ">
           <span className="text-sm font-semibold">
             {timeLeft.seconds}
           </span>
-          <span className="text-xs  text-neutral-500 dark:text-neutral-400">seconds</span>
+          <span className="text-xs  text-neutral-500 dark:text-neutral-400">sec</span>
         </div>
       </div>
     </div>
