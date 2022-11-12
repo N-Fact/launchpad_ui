@@ -75,7 +75,7 @@ const CardLarge2: FC<CardLarge2Props> = ({
               <div className=" flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-12">
                 <div className="flex items-center">
                   <div className="flex-shrink-0 h-10 w-10">
-                    <Avatar sizeClass="w-10 h-10" />
+                    <Avatar imgUrl={project?.user?.avatar != null ? "https://novemyazilim.com/blockchain/public/" + project?.user?.avatar : "https://novemyazilim.com/blockchain/public/uploads/blank.png"} sizeClass="w-10 h-10" />
                   </div>
                   <div className="ml-3 text-start">
                     <div className="text-xs dark:text-neutral-400">Creator</div>

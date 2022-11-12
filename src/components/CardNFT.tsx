@@ -1,4 +1,5 @@
 import { ClockIcon } from "@heroicons/react/outline";
+import useRemainingTime from "hooks/useRemainingTime";
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import NcImage from "shared/NcImage/NcImage";
@@ -9,19 +10,27 @@ export interface CardNFTProps {
   isLiked?: boolean;
   title?: string;
   items?: number;
-  price?: any;
+  rounds?: any;
   totalitems?: string;
   isEnd?: boolean;
   linkTo?: string;
   image?: string;
+  remainingTime?: any;
 }
 
-const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, items = "0", title = "", price = [], totalitems = "1000", isEnd = false, linkTo = "/nft-detail/4", image = "" }) => {
+const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, items = "0", title = "", rounds = [], totalitems = "1000", isEnd = false, linkTo = "/nft-detail/4", image = "", remainingTime = 4 }) => {
 
-  let publicPrice = price.filter((item: any) => {
+  let publicRound = rounds.filter((item: any) => {
     return item.name == "Public";
   });
 
+  const timeLeft = useRemainingTime(publicRound[0]?.event_date);
+  let timeLeftString: any;
+  if (timeLeft.days == 0 && timeLeft.hours > 0) {
+    timeLeftString = timeLeft.hours + " Hours left";
+  } else if (timeLeft.days > 0 && timeLeft.hours > 0) {
+    timeLeftString = timeLeft.days + " Day " + timeLeft.hours + " Hour left";
+  }
 
   return (
     <div
@@ -61,12 +70,12 @@ const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, items = "0", title
         <div className="w-2d4 w-full border-b border-neutral-100 dark:border-neutral-700"></div>
 
         <div className="flex justify-between items-end ">
-          <Prices price={publicPrice[0]?.price} labelTextClassName="bg-white dark:bg-neutral-900 dark:group-hover:bg-neutral-800 group-hover:bg-neutral-50" />
+          <Prices price={publicRound[0]?.price} labelTextClassName="bg-white dark:bg-neutral-900 dark:group-hover:bg-neutral-800 group-hover:bg-neutral-50" />
           <div className="flex items-center text-sm text-neutral-500 dark:text-neutral-400">
 
             {isEnd ? "" : <ClockIcon className="w-4 h-4" />}
             <span className="ml-1 mt-0.5">
-              {isEnd ? "Sold out" : Math.floor(Math.random() * 20) + 1 + " hours left"}
+              {isEnd ? "Sold out" : timeLeftString}
             </span>
           </div>
         </div>

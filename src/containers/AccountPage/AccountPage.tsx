@@ -1,15 +1,14 @@
 import axios from "axios";
 import Label from "components/Label/Label";
-import { avatarImgs } from "contains/fakeData";
 import StateProvider from "context/StateProvider";
 import { FC, useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import toast from "react-hot-toast";
-import Avatar from "shared/Avatar/Avatar";
+import AvatarAccount from "shared/Avatar/AvatarAccount";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import Input from "shared/Input/Input";
 import Textarea from "shared/Textarea/Textarea";
-
+const blankpng = "https://novemyazilim.com/blockchain/public/uploads/blank.png";
 export interface AccountPageProps {
   className?: string;
 }
@@ -41,7 +40,6 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
   const [discord, setDiscord] = useState("");
   const [twitter, setTwitter] = useState("");
   const [telegram, setTelegram] = useState("");
-
   useEffect(() => {
     setimage(user?.image);
     setName(user?.name);
@@ -54,16 +52,19 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
 
   }, [user])
   function changeImage(e: any) {
-    console.log(e.target.files[0]);
-    setimage(window.URL.createObjectURL(e.target.files[0]));
     setrealimage(e.target.files[0]);
+    const avatarImage = document.querySelector('#profile-img') as HTMLImageElement | null;
 
-    console.log(image);
+    if (avatarImage !== null) {
+      avatarImage.src = window.URL.createObjectURL(e.target.files[0]);
+    }
+
   }
   async function updateProfile() {
     let post = {
       name: name,
       email: email,
+      avatar: realimage,
       bio: bio,
       website: website,
       discord: discord,
@@ -88,9 +89,12 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
       //   'https://blockchain.novemyazilim.com/api/v1/user/14',
       //   post
       // );
-      let res = await axios.put(
-        'https://blockchain.novemyazilim.com/api/v1/user/' + user?.id,
-        post
+      let res = await axios.post(
+        'https://blockchain.novemyazilim.com/api/v1/user/' + user?.id + '?_method=PUT',
+        post,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        }
       );
 
 
@@ -132,7 +136,6 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
     }
 
   }
-
   return (
     <div className={`nc-AccountPage ${className}`} data-nc-id="AccountPage">
       <Helmet>
@@ -155,7 +158,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
             <div className="flex-shrink-0 flex items-start">
               <div className="relative rounded-full overflow-hidden flex">
 
-                <Avatar id="profile-img" imgUrl={image != null ? image : avatarImgs[0]} sizeClass="w-32 h-32" />
+                <AvatarAccount id="profile-img" imgUrl={user?.avatar != null ? "https://novemyazilim.com/blockchain/public/" + user?.avatar : blankpng} sizeClass="w-32 h-32" />
                 <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer">
                   <svg
                     width="30"

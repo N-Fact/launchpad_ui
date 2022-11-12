@@ -19,7 +19,7 @@ const SectionGridFeatureNFTSold: FC<SectionGridFeatureNFTSoldProps> = ({ title =
 
         {projects?.map((project, index) => {
           return (
-            <CardNFT linkTo={"/nft-detail/" + project.id} key={index} title={project.title} totalitems={project.total_supply} items={0} price={project.rounds} isEnd={true} />
+            <CardNFT linkTo={"/nft-detail/" + project.slug} image={project.image} key={index} title={project.title} items={project.total_supply} rounds={project.rounds} isEnd={false} />
           );
         })}
 

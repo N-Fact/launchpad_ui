@@ -1,8 +1,7 @@
 import useCountDownTime from "hooks/useCountDownTime";
-import React from "react";
 
 const TimeCountDown = () => {
-  const timeLeft = useCountDownTime();
+  const timeLeft = useCountDownTime("2022-11-13T21:32");
 
   return (
     <div className="space-y-5">

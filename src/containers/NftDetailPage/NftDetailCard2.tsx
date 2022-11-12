@@ -39,8 +39,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
             <div className="">
               <NcImage
                 src={"https://novemyazilim.com/blockchain/public/" + project?.image}
-                containerClassName="aspect-w-1 aspect-h-1 rounded-[15px] overflow-hidden"
-              />
+                containerClassName="aspect-w-1 aspect-h-1 rounded-[15px] overflow-hidden" />
               <div className="mt-4">
                 <div className="flex ">
                   <span className="opacity-75 text-sm">Total minted</span>
@@ -88,7 +87,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
               <div className="flex justify-between items-center sm:flex-row space-y-3 sm:space-y-0 sm:space-x-6">
                 <div className="flex items-center">
                   <div className="flex-shrink-0 h-10 w-10">
-                    <Avatar sizeClass="w-10 h-10" />
+                    <Avatar imgUrl={project?.user?.avatar != null ? "https://novemyazilim.com/blockchain/public/" + project?.user?.avatar : "https://novemyazilim.com/blockchain/public/uploads/blank.png"} sizeClass="w-10 h-10" />
                   </div>
                   <div className="ml-3">
                     <div className="text-xs dark:text-neutral-400">Creator</div>
@@ -170,7 +169,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
                             <span className="font-sm text-base rounded">
                               {round.mintbywallet} Mint per wallet <br /><b> Price: <span className="text-green-600">{round.price} $APT</span></b>
                             </span>
-                            <TimeCountDown />
+                            <TimeCountDown eventDate={round.event_date} />
                           </div>
                         </div>
                       )

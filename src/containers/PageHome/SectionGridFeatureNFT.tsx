@@ -17,7 +17,7 @@ const SectionGridFeatureNFT: FC<SectionGridFeatureNFTProps> = ({ title = "", pro
       >
         {
           projects?.map((project, index) => (
-            <CardNFT linkTo={"/nft-detail/" + project.slug} image={project.image} key={index} title={project.title} items={project.total_supply} price={project.rounds} isEnd={false} />
+            <CardNFT linkTo={"/nft-detail/" + project.slug} image={project.image} key={index} title={project.title} items={project.total_supply} rounds={project.rounds} isEnd={false} />
           ))
         }
       </div>

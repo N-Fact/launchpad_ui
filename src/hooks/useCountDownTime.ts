@@ -1,10 +1,13 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const calculateTimeLeft = () => {
-  let year = new Date().getFullYear();
-  let month = new Date().getMonth();
-  let difference = +new Date(`${month + 2}/10/${year}`) - +new Date();
+const calculateTimeLeft = (data: any) => {
+  var now = new Date;
 
+  var eventStartTimeUTC = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(),
+    now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
+
+  var eventEndTime = new Date(data);
+  var difference = eventEndTime.valueOf() - eventStartTimeUTC.valueOf();
   let timeLeft = {
     days: 0,
     hours: 0,
@@ -24,12 +27,12 @@ const calculateTimeLeft = () => {
   return timeLeft;
 };
 
-const useCountDownTime = () => {
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+const useCountDownTime = (data: any) => {
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(data));
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setTimeLeft(calculateTimeLeft());
+      setTimeLeft(calculateTimeLeft(data));
     }, 1000);
     return () => clearTimeout(timer);
   });

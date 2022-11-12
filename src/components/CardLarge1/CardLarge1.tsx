@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import Avatar from "shared/Avatar/Avatar";
 import NcImage from "shared/NcImage/NcImage";
 import NextPrev from "shared/NextPrev/NextPrev";
-import TimeCountDown from "./TimeCountDown";
 
 export interface CardLarge1Props {
   className?: string;
@@ -86,7 +85,7 @@ const CardLarge1: FC<CardLarge1Props> = ({
           </div>
 
           {/* AUTION TIME */}
-          <TimeCountDown />
+          {/* <TimeCountDown /> */}
 
           <div className="w h-[1px] bg-neutral-100 dark:bg-neutral-700"></div>
 

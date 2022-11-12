@@ -1,5 +1,6 @@
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import axios from "axios";
+import AccountPage from "containers/AccountPage/AccountPage";
 import NftDetailPage from "containers/NftDetailPage/NftDetailPages";
 import Page404 from "containers/Page404/Page404";
 import PageHome from "containers/PageHome/PageHome";
@@ -12,18 +13,16 @@ import ScrollToTop from "./ScrollToTop";
 import { Page } from "./types";
 
 export const pages: Page[] = [
+  { path: "*", component: Page404 },
   { path: "/", component: PageHome },
   { path: "/#", component: PageHome },
   { path: "/nft-detail/:slug", component: NftDetailPage },
-
-
-  // { path: "/home2", component: PageHome },
+  { path: "/account", component: AccountPage },
   // { path: "/home3", component: PageHome2 },
   // { path: "/home-header-2", component: PageHome },
   // { path: "/page-collection", component: PageCollection },
   // { path: "/page-search", component: PageSearch },
   // { path: "/page-author", component: AuthorPage },
-  // { path: "/account", component: AccountPage },
   // { path: "/page-upload-item", component: PageUploadItem },
   // { path: "/connect-wallet", component: PageConnectWallet },
   // { path: "/blog", component: BlogPage },
