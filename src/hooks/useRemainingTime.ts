@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const calculateTimeLeft = (data: any) => {
+const calculateTimeLeft = (data = "2023-11-13T21:32") => {
   var now = new Date;
 
   var eventStartTimeUTC = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(),
@@ -23,7 +23,7 @@ const calculateTimeLeft = (data: any) => {
   return timeLeft;
 };
 
-const useRemainingTime = (data: any) => {
+const useRemainingTime = (data = "2023-11-13T21:32") => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(data));
 
   useEffect(() => {

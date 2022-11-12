@@ -14,11 +14,10 @@ export interface CardNFTProps {
   isEnd?: boolean;
   linkTo?: string;
   image?: string;
-  remainingTime?: any;
   supply?: any;
 }
 
-const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, title = "", rounds = [], totalitems = "1000", isEnd = false, linkTo = "/nft-detail/4", image = "", remainingTime = 4, supply = 0 }) => {
+const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, title = "", rounds = [], totalitems = "1000", isEnd = false, linkTo = "/nft-detail/4", image = "", supply = 0 }) => {
 
   let supplyStatus: any;
 
@@ -42,6 +41,8 @@ const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, title = "", rounds
     timeLeftString = timeLeft.hours + " Hours left";
   } else if (timeLeft.days > 0 && timeLeft.hours > 0) {
     timeLeftString = timeLeft.days + " Day " + timeLeft.hours + " Hour left";
+  } else if (timeLeft.days > 0 && timeLeft.hours == 0) {
+    timeLeftString = timeLeft.days + " Day left";
   }
 
   return (
