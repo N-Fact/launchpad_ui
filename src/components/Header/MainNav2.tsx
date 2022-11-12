@@ -26,14 +26,14 @@ const MainNav2: FC<MainNav2Props> = () => {
         <div className="flex justify-start flex-grow items-center space-x-3 sm:space-x-5 lg:space-x-5">
           <Logo />
           <Link to="/" className="logo-text lg:text-3xl sm:text-2-1 text-xl">
-            DKTOOLS
+            CATAPULT
           </Link>
 
         </div>
         <div className="flex-shrink-0 flex items-center justify-end text-neutral-700 dark:text-neutral-100 space-x-1">
           <div className="hidden items-center xl:flex space-x-2">
-            <Navigation />
-            <div className="hidden sm:block h-10 border-l border-neutral-300 dark:border-neutral-6000 pl-4"></div>
+            
+           
 
             <button className='connect-wallet-btn'
               onClick={connectWallet}
