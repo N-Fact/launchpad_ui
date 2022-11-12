@@ -10,6 +10,7 @@ export interface CardLarge2Props {
   onClickNext?: () => void;
   onClickPrev?: () => void;
   project?: any;
+  projectLength?: number;
 
 }
 
@@ -18,6 +19,7 @@ const CardLarge2: FC<CardLarge2Props> = ({
   project = [],
   onClickNext = () => { },
   onClickPrev = () => { },
+  projectLength = 0,
 }) => {
   return (
     <div
@@ -96,11 +98,13 @@ const CardLarge2: FC<CardLarge2Props> = ({
               >Apply For Waitlist</Link>
             </div>
             <div className="pt-6">
-              <NextPrev
-                btnClassName="w-11 h-11 text-xl"
-                onClickNext={onClickNext}
-                onClickPrev={onClickPrev}
-              />
+              {
+                projectLength != 1 ? <NextPrev
+                  btnClassName="w-11 h-11 text-xl"
+                  onClickNext={onClickNext}
+                  onClickPrev={onClickPrev}
+                /> : null
+              }
             </div>
           </div>
         </div>

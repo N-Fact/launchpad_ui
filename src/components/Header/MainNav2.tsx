@@ -4,7 +4,6 @@ import { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "shared/Logo/Logo";
 import MenuBar from "shared/MenuBar/MenuBar";
-import Navigation from "shared/Navigation/Navigation";
 import NcModal from 'shared/NcModal/NcModal';
 export interface MainNav2Props { }
 
@@ -32,8 +31,6 @@ const MainNav2: FC<MainNav2Props> = () => {
         </div>
         <div className="flex-shrink-0 flex items-center justify-end text-neutral-700 dark:text-neutral-100 space-x-1">
           <div className="hidden items-center xl:flex space-x-2">
-            
-           
 
             <button className='connect-wallet-btn'
               onClick={connectWallet}

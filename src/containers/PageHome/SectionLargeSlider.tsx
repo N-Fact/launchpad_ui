@@ -38,6 +38,7 @@ const SectionLargeSlider: FC<SectionLargeSliderProps> = ({
         indexActive === index ? (
           <CardLarge2
             key={index}
+            projectLength={projectLength}
             onClickNext={handleClickNext}
             onClickPrev={handleClickPrev}
             project={project}

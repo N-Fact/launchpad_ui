@@ -1,10 +1,12 @@
-import React, { useState, Fragment } from "react";
-import { Transition, Dialog } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
+
+import React, { Fragment, useState } from "react";
 import NavMobile from "shared/Navigation/NavMobile";
 
-export interface MenuBarProps {}
+export interface MenuBarProps { }
 const MenuBar: React.FC<MenuBarProps> = () => {
   const [isVisable, setIsVisable] = useState(false);
+
 
   const handleOpenMenu = () => setIsVisable(true);
   const handleCloseMenu = () => setIsVisable(false);
@@ -47,6 +49,7 @@ const MenuBar: React.FC<MenuBarProps> = () => {
             </React.Fragment>
           </div>
         </Dialog>
+
       </Transition>
     );
   };

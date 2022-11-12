@@ -1,22 +1,6 @@
 import { NavItemType } from "shared/Navigation/NavigationItem";
 import ncNanoId from "utils/ncNanoId";
 
-const otherPageChildMenus: NavItemType[] = [
-  {
-    id: ncNanoId(),
-    href: "/",
-    name: "Launches",
-  },
-  {
-    id: ncNanoId(),
-    href: "https://github.com/",
-    name: "Apply for launchpad",
-    targetBlank: true,
-    hrefType: "normal"
-  },
-
-];
-
 const otherPageChildMenus2: NavItemType[] = [
   {
     id: ncNanoId(),
@@ -118,12 +102,10 @@ const otherPageChildMenus2: NavItemType[] = [
 ];
 
 export const NAVIGATION_DEMO_2: NavItemType[] = [
-  {
-    id: ncNanoId(),
-    href: "/home2",
-    name: "Launchpad",
-    type: "dropdown",
-    children: otherPageChildMenus,
+  // {
+  //   id: ncNanoId(),
+  //   href: "https://github.com/",
+  //   name: "Apply for Launchpad",
 
-  }
+  // }
 ];

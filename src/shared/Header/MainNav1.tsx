@@ -1,10 +1,9 @@
-import React, { FC } from "react";
+import { FC } from "react";
+import ButtonPrimary from "shared/Button/ButtonPrimary";
 import Logo from "shared/Logo/Logo";
 import Navigation from "shared/Navigation/Navigation";
-import SearchDropdown from "./SearchDropdown";
-import ButtonPrimary from "shared/Button/ButtonPrimary";
-import MenuBar from "shared/MenuBar/MenuBar";
 import SwitchDarkMode from "shared/SwitchDarkMode/SwitchDarkMode";
+import SearchDropdown from "./SearchDropdown";
 
 export interface MainNav1Props {
   isTop: boolean;
@@ -13,9 +12,8 @@ export interface MainNav1Props {
 const MainNav1: FC<MainNav1Props> = ({ isTop }) => {
   return (
     <div
-      className={`nc-MainNav1 relative z-10 ${
-        isTop ? "onTop " : "notOnTop backdrop-filter"
-      }`}
+      className={`nc-MainNav1 relative z-10 ${isTop ? "onTop " : "notOnTop backdrop-filter"
+        }`}
     >
       <div className="container py-5 relative flex justify-between items-center space-x-4 xl:space-x-8">
         <div className="flex justify-start flex-grow items-center space-x-4 sm:space-x-10 2xl:space-x-14">
@@ -30,7 +28,7 @@ const MainNav1: FC<MainNav1Props> = ({ isTop }) => {
             <ButtonPrimary href="/login">Sign up</ButtonPrimary>
           </div>
           <div className="flex items-center xl:hidden">
-            <MenuBar />
+            {/* <MenuBar /> */}
           </div>
         </div>
       </div>

@@ -2,7 +2,6 @@ import StateProvider from "context/StateProvider";
 import { FC, useContext } from "react";
 import { Link } from "react-router-dom";
 import Logo from "shared/Logo/Logo";
-import Navigation from "shared/Navigation/Navigation";
 import AvatarDropdown from "./AvatarDropdown";
 import NotifyDropdown from "./NotifyDropdown";
 
@@ -22,7 +21,9 @@ const MainNav2Logged: FC<MainNav2LoggedProps> = () => {
         </div>
         <div className="flex-shrink-0 flex items-center justify-end text-neutral-700 dark:text-neutral-100 space-x-1">
           <div className="hidden items-center xl:flex space-x-2">
-            <Navigation />
+            <a className="inline-flex items-center text-sm xl:text-base py-2 px-4 xl:px-5 rounded-full hover:text-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 font-normal text-neutral-700 dark:text-neutral-300" href="https://twitter.com/home">
+              Apply For Launchpad
+            </a>
             <div className="hidden sm:block h-6 border-l border-neutral-300 dark:border-neutral-6000"></div>
             <div className="flex">
               <NotifyDropdown />
