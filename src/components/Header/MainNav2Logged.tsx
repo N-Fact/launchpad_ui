@@ -16,7 +16,7 @@ const MainNav2Logged: FC<MainNav2LoggedProps> = () => {
         <div className="flex justify-start flex-grow items-center space-x-3 sm:space-x-5 lg:space-x-5">
           <Logo />
           <Link to="/" className="logo-text lg:text-3xl sm:text-2-1 text-xl">
-            DKTOOLS
+            CATAPULT
           </Link>
         </div>
         <div className="flex-shrink-0 flex items-center justify-end text-neutral-700 dark:text-neutral-100 space-x-1">
