@@ -112,7 +112,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
                       return (
                         <div key={index} className="rounded-2xl gap-6 flex flex-col shadow-md border border-neutral-50 dark:border-neutral-800 hover:bg-zinc-900 duration-500 p-2 lg:p-3 items-start">
                           <div className="flex w-full">
-                            <span className="text-xs text-white rounded-full shadow-md bg-slate-800 py-1 px-2">
+                            <span className="text-xs text-white rounded-full shadow-md bg-slate-800 py-1 px-2 capitalize">
                               {round.name}
                             </span>
                             <span className="text-xs text-white rounded-full shadow-md bg-slate-800 py-1 px-2 ml-2">
@@ -134,7 +134,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
                       return (
                         <div key={index} className="rounded-2xl gap-6 flex flex-col shadow-md border border-neutral-50 dark:border-neutral-800 hover:bg-zinc-900 duration-500 p-2 lg:p-3 items-start">
                           <div className="flex w-full">
-                            <span className="text-xs shadow-md text-white rounded-full bg-slate-800 py-1 px-2">
+                            <span className="text-xs shadow-md text-white rounded-full bg-slate-800 py-1 px-2 capitalize">
                               {round.name}
                             </span>
                             <span className="text-xs shadow-md text-white rounded-full bg-slate-800 py-1 px-2 ml-2">
@@ -158,7 +158,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
                       return (
                         <div key={index} className="rounded-2xl gap-6 flex flex-col shadow-md border border-neutral-50 dark:border-neutral-800 hover:bg-zinc-900 duration-500 p-2 lg:p-3 items-start">
                           <div className="flex w-full">
-                            <span className="text-xs shadow-md text-white rounded-full bg-slate-800 py-1 px-2">
+                            <span className="text-xs shadow-md text-white rounded-full bg-slate-800 py-1 px-2 capitalize">
                               {round.name}
                             </span>
                             <span className="text-xs shadow-md text-white rounded-full bg-slate-800 py-1 px-2 ml-2">
