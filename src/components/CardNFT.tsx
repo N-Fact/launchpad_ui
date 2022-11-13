@@ -33,7 +33,7 @@ const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, title = "", rounds
   }
 
   let publicRound = rounds.filter((item: any) => {
-    return item.name == "Public";
+    return item.name == "public";
   });
 
   const timeLeft = useRemainingTime(publicRound[0]?.event_date);
@@ -44,6 +44,8 @@ const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, title = "", rounds
     timeLeftString = timeLeft.days + " Day " + timeLeft.hours + " Hour";
   } else if (timeLeft.days > 0 && timeLeft.hours == 0) {
     timeLeftString = timeLeft.days + " Day";
+  } else {
+    timeLeftString = timeLeft.minutes + " Min ";
   }
   const { imageUrl } = useContext(StateProvider);
 
