@@ -37,41 +37,58 @@ export const pages: Page[] = [
 const MyRoutes = () => {
   const { disconnect, wallet, autoConnect, select, connect, connected, account, ...rest } = useWallet();
   const { user, setUser } = useContext(StateProvider);
-
   useEffect(() => {
+    async function checkWallet() {
+      const currentWallet = await axios.post("https://blockchain.novemyazilim.com/api/v1/user/login", {
+        "wallet_address": account?.address,
+      });
+      if (currentWallet.data.status === "false") {
+        const Random = Math.floor(100000 + Math.random() * 900000);
+        const createWallet = await axios.post("https://blockchain.novemyazilim.com/api/v1/user", {
+          "wallet_address": account?.address,
+          "public_key": account?.publicKey,
+          "wallet_name": wallet?.adapter.name,
+          "name": "dktools-" + Random,
+        });
+        if (createWallet.status == 200) {
+          console.log(createWallet);
+          setUser(createWallet.data.data);
+          sessionStorage.setItem('id', createWallet.data.data.id);
+        } else {
+          disconnect();
+        }
+      } else {
+        console.log(currentWallet);
+        setUser(currentWallet.data.data);
+        sessionStorage.setItem('id', currentWallet.data.data.id);
+      }
+    }
+
+    async function checkUser() {
+      const user = await axios.post("https://blockchain.novemyazilim.com/api/v1/user/login", {
+        "wallet_address": account?.address,
+      });
+      if (user.data.status == "true") {
+        setUser(user.data.data);
+        sessionStorage.setItem('id', user.data.data.id);
+      } else {
+        disconnect();
+      }
+    }
 
     if (connected) {
+
       if (sessionStorage.getItem('firstConnected') === 'true') {
         sessionStorage.setItem('firstConnected', "false");
         // axios post
-        axios.post("https://blockchain.novemyazilim.com/api/v1/user/login", {
-          "wallet_address": account?.address,
-        })
-          .then((response) => {
-            if (response.data.status === "false") {
-              const Random = Math.floor(100000 + Math.random() * 900000);
-
-              axios.post("https://blockchain.novemyazilim.com/api/v1/user", {
-                "wallet_address": account?.address,
-                "public_key": account?.publicKey,
-                "wallet_name": wallet?.adapter.name,
-                "name": "dktools-" + Random,
-              }).then(response => {
-                if (response.data.status === "false") {
-                  disconnect();
-                } else {
-                  setUser(response.data.data);
-                  sessionStorage.setItem('id', response.data.data.id);
-                }
-              });
-            } else {
-              console.log(response.data.data);
-
-              setUser(response.data.data);
-              sessionStorage.setItem('id', response.data.data.id);
-            }
-          });
+        checkWallet();
       }
+      if (user == null) {
+        checkUser()
+      }
+      console.log(connected);
+      console.log(user);
+
     }
   }, [account, connected, user]);
 

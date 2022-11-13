@@ -21,10 +21,10 @@ const SectionMagazine8: FC<SectionMagazine8Props> = ({ className = "" }) => {
       try {
         const response = await fetch(url);
         const json = await response.json();
-        console.log(json);
+        // console.log(json);
         setAdvice(json);
       } catch (error) {
-        console.log("error", error);
+        // console.log("error", error);
       }
     };
 

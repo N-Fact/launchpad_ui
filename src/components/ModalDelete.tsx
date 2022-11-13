@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import ButtonSecondary from "shared/Button/ButtonSecondary";
 import NcModal from "shared/NcModal/NcModal";
@@ -10,7 +10,7 @@ export interface ModalDeleteProps {
 
 const ModalDelete: FC<ModalDeleteProps> = ({ show, onCloseModalDelete }) => {
   const handleClickSubmitForm = () => {
-    console.log({ 1: "1" });
+    // console.log({ 1: "1" });
   };
 
   const renderContent = () => {

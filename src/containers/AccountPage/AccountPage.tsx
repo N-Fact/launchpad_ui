@@ -110,6 +110,8 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
             },
           }
         );
+        setUser(res.data.data);
+
       } else {
         toast.error("profile update failed",
           {

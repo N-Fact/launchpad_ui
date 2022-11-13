@@ -20,7 +20,7 @@ const SectionLargeSlider: FC<SectionLargeSliderProps> = ({
       return state + 1;
     });
   };
-  console.log(indexActive);
+  // console.log(indexActive);
   const handleClickPrev = () => {
     setIndexActive((state) => {
       if (state === 0) {

@@ -11,6 +11,8 @@ export interface SiteHeaderProps {
 const SiteHeader: FC<SiteHeaderProps> = (connected) => {
   let location = useLocation();
   const { user, setUser } = useContext(StateProvider);
+  // console.log(user);
+  // console.log(connected);
 
   if (connected.connected && user != null) {
 
