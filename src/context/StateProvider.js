@@ -10,10 +10,12 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
     // console.log("wqewqe");
     const [user, setUser] = useState(null);
+    const imageUrl = "https://novemyazilim.com/blockchain/public/";
 
     const values = {
         user,
         setUser,
+        imageUrl,
     };
     if (sessionStorage.id != null) {
         getUser(values);

@@ -1,4 +1,5 @@
-import { FC } from "react";
+import StateProvider from "context/StateProvider";
+import { FC, useContext } from "react";
 import { Link } from "react-router-dom";
 import Avatar from "shared/Avatar/Avatar";
 import NcImage from "shared/NcImage/NcImage";
@@ -21,6 +22,7 @@ const CardLarge2: FC<CardLarge2Props> = ({
   onClickPrev = () => { },
   projectLength = 0,
 }) => {
+  const { imageUrl } = useContext(StateProvider);
   return (
     <div
       className={`nc-CardLarge2 nc-CardLarge2--hasAnimation  ${className}`}
@@ -34,7 +36,7 @@ const CardLarge2: FC<CardLarge2Props> = ({
           <div className="flex flex-grow flex-col sm:flex-row md:block sm:items-start sm:justify-between">
             <div className="">
               <NcImage
-                src={"https://novemyazilim.com/blockchain/public/" + project?.image}
+                src={imageUrl + project?.image}
                 containerClassName="aspect-w-1 aspect-h-1 rounded-[15px] overflow-hidden"
               />
             </div>
@@ -75,7 +77,7 @@ const CardLarge2: FC<CardLarge2Props> = ({
               <div className=" flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-12">
                 <div className="flex items-center">
                   <div className="flex-shrink-0 h-10 w-10">
-                    <Avatar imgUrl={project?.user?.avatar != null ? "https://novemyazilim.com/blockchain/public/" + project?.user?.avatar : "https://novemyazilim.com/blockchain/public/uploads/blank.png"} sizeClass="w-10 h-10" />
+                    <Avatar imgUrl={project?.user?.avatar != null ? imageUrl + project?.user?.avatar : imageUrl + "uploads/blank.png"} sizeClass="w-10 h-10" />
                   </div>
                   <div className="ml-3 text-start">
                     <div className="text-xs dark:text-neutral-400">Creator</div>

@@ -1,7 +1,8 @@
 import { Popover, Transition } from "@headlessui/react";
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import { avatarImgs } from "contains/fakeData";
-import { Fragment } from "react";
+import StateProvider from "context/StateProvider";
+import { Fragment, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Avatar from "shared/Avatar/Avatar";
 
@@ -21,8 +22,8 @@ function truncate(text: string, startChars: any, endChars: number, maxLength: nu
 export default function AvatarDropdown(user: any) {
   const { connected, account, wallet, disconnect, ...rest } = useWallet();
   let navigate = useNavigate();
+  const { imageUrl } = useContext(StateProvider);
 
-  // const [user, setuser] = useState(null)
 
   return (
     <div className="AvatarDropdown">
@@ -33,7 +34,7 @@ export default function AvatarDropdown(user: any) {
               className={`inline-flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
             >
               <Avatar
-                imgUrl={user.user.avatar != null ? "https://novemyazilim.com/blockchain/public/" + user.user.avatar : avatarImgs[0]}
+                imgUrl={user.user.avatar != null ? imageUrl + user.user.avatar : avatarImgs[0]}
                 sizeClass="w-8 h-8 sm:w-9 sm:h-9"
               />
             </Popover.Button>
@@ -50,7 +51,7 @@ export default function AvatarDropdown(user: any) {
                 <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6">
                     <div className="flex items-center space-x-3">
-                      <Avatar imgUrl={user.user.avatar != null ? "https://novemyazilim.com/blockchain/public/" + user.user.avatar : avatarImgs[0]} sizeClass="w-12 h-12" />
+                      <Avatar imgUrl={user.user.avatar != null ? imageUrl + user.user.avatar : avatarImgs[0]} sizeClass="w-12 h-12" />
 
                       <div className="flex-grow">
                         <h4 className="font-semibold">{user.user.name}</h4>

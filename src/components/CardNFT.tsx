@@ -1,6 +1,7 @@
 import { ClockIcon } from "@heroicons/react/outline";
+import StateProvider from "context/StateProvider";
 import useRemainingTime from "hooks/useRemainingTime";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { Link } from "react-router-dom";
 import NcImage from "shared/NcImage/NcImage";
 import Prices from "./Prices";
@@ -44,6 +45,7 @@ const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, title = "", rounds
   } else if (timeLeft.days > 0 && timeLeft.hours == 0) {
     timeLeftString = timeLeft.days + " Day";
   }
+  const { imageUrl } = useContext(StateProvider);
 
   return (
     <div
@@ -54,7 +56,7 @@ const CardNFT: FC<CardNFTProps> = ({ className = "", isLiked, title = "", rounds
         <div>
           <NcImage
             containerClassName="flex aspect-w-11 aspect-h-12 w-full h-0 rounded-[15px] overflow-hidden z-0"
-            src={"https://novemyazilim.com/blockchain/public/" + image}
+            src={imageUrl + image}
             className="object-cover w-full h-full group-hover:scale-[1.03] transition-transform duration-300 ease-in-out will-change-transform"
           />
         </div>

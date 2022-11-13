@@ -8,7 +8,6 @@ import AvatarAccount from "shared/Avatar/AvatarAccount";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import Input from "shared/Input/Input";
 import Textarea from "shared/Textarea/Textarea";
-const blankpng = "https://novemyazilim.com/blockchain/public/uploads/blank.png";
 export interface AccountPageProps {
   className?: string;
 }
@@ -30,7 +29,7 @@ const copyClippoard = (event: React.MouseEvent<HTMLButtonElement>) => {
 };
 
 const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
-  const { user, setUser } = useContext(StateProvider);
+  const { user, setUser, imageUrl } = useContext(StateProvider);
   const [image, setimage] = useState<any | null>(null);
   const [realimage, setrealimage] = useState<any | null>(null);
   const [name, setName] = useState("");
@@ -40,6 +39,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
   const [discord, setDiscord] = useState("");
   const [twitter, setTwitter] = useState("");
   const [telegram, setTelegram] = useState("");
+
   useEffect(() => {
     setimage(user?.image);
     setName(user?.name);
@@ -136,6 +136,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
     }
 
   }
+
   return (
     <div className={`nc-AccountPage ${className}`} data-nc-id="AccountPage">
       <Helmet>
@@ -158,7 +159,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
             <div className="flex-shrink-0 flex items-start">
               <div className="relative rounded-full overflow-hidden flex">
 
-                <AvatarAccount id="profile-img" imgUrl={user?.avatar != null ? "https://novemyazilim.com/blockchain/public/" + user?.avatar : blankpng} sizeClass="w-32 h-32" />
+                <AvatarAccount id="profile-img" imgUrl={user?.avatar != null ? imageUrl + user?.avatar : imageUrl + "uploads/blank.png"} sizeClass="w-32 h-32" />
                 <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer">
                   <svg
                     width="30"

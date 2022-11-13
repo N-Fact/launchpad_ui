@@ -1,4 +1,5 @@
-import { FC } from "react";
+import StateProvider from "context/StateProvider";
+import { FC, useContext } from "react";
 import Avatar from "shared/Avatar/Avatar";
 import Button from "shared/Button/Button";
 import NcImage from "shared/NcImage/NcImage";
@@ -15,12 +16,14 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
   project = null,
 }) => {
   let noData;
-  console.log(project);
+  const { imageUrl } = useContext(StateProvider);
+
   if (project?.rounds?.length == 0) {
     noData = (
       <div className="rounded-2xl gap-6 flex flex-col shadow-md border border-neutral-50 dark:border-neutral-800 hover:bg-zinc-900 duration-500 p-2 lg:p-3 items-start">
         <div className="flex w-full justify-center">
-          <h2 className="text-2xl">  There are no rounds</h2>
+          <h2 className="text-2xl ">  There are no rounds</h2>
+          <div style={{ width: "150px" }}></div>
         </div>
       </div>
     );
@@ -38,7 +41,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
           <div className="flex flex-grow flex-col sm:flex-row md:block sm:items-start sm:justify-between">
             <div className="">
               <NcImage
-                src={"https://novemyazilim.com/blockchain/public/" + project?.image}
+                src={imageUrl + project?.image}
                 containerClassName="aspect-w-1 aspect-h-1 rounded-[15px] overflow-hidden" />
               <div className="mt-4">
                 <div className="flex ">
@@ -87,7 +90,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
               <div className="flex justify-between items-center sm:flex-row space-y-3 sm:space-y-0 sm:space-x-6">
                 <div className="flex items-center">
                   <div className="flex-shrink-0 h-10 w-10">
-                    <Avatar imgUrl={project?.user?.avatar != null ? "https://novemyazilim.com/blockchain/public/" + project?.user?.avatar : "https://novemyazilim.com/blockchain/public/uploads/blank.png"} sizeClass="w-10 h-10" />
+                    <Avatar imgUrl={project?.user?.avatar != null ? imageUrl + project?.user?.avatar : imageUrl + "uploads/blank.png"} sizeClass="w-10 h-10" />
                   </div>
                   <div className="ml-3">
                     <div className="text-xs dark:text-neutral-400">Creator</div>
