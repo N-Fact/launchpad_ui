@@ -4,6 +4,7 @@ import Avatar from "shared/Avatar/Avatar";
 import Button from "shared/Button/Button";
 import NcImage from "shared/NcImage/NcImage";
 import TimeCountDown from "./TimeCountDown";
+import { useWallet } from "@manahippo/aptos-wallet-adapter";
 
 
 export interface CardLarge2Props {
@@ -11,12 +12,25 @@ export interface CardLarge2Props {
   project: any;
 }
 
+
 const NftDetailCard2: FC<CardLarge2Props> = ({
   className = "",
   project = null,
 }) => {
   let noData;
   const { imageUrl } = useContext(StateProvider);
+  const { connected, account, wallet,signAndSubmitTransaction, disconnect, ...rest } = useWallet();
+
+  async function sendMintTransaction() {
+
+    const transaction = {
+      type: "entry_function_payload",
+      function: project?.contract_address+`::launcpad_mint::mint_nft`,
+      arguments: [], 
+      type_arguments: [],
+    };
+    await signAndSubmitTransaction(transaction);
+  }
 
   if (project?.rounds?.length == 0) {
     noData = (
@@ -148,7 +162,9 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
                             <span className="font-sm text-base rounded">
                               {round.mintbywallet} Mint per wallet <br /><b> Price: <span className="text-green-600">{round.price} $APT</span></b>
                             </span>
-                            <Button className="bg-blue-600 hover:bg-green-700 duration-500 font-semibold rounded-md space" sizeClass="px-6 py-2 "  >MINT</Button>
+                            <Button className="bg-blue-600 hover:bg-green-700 duration-500 font-semibold rounded-md space" sizeClass="px-6 py-2 " onClick={async () => {
+              await sendMintTransaction();
+            }}  >MINT</Button>
 
                           </div>
                         </div>
