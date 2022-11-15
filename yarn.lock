@@ -2827,10 +2827,10 @@
     "normalize-path" "^3.0.0"
     "picomatch" "^2.0.4"
 
-"aptos@^1.3.14", "aptos@^1.3.16":
-  "integrity" "sha512-LxI4XctQ5VeL+HokjwuGPwsb1fcydLIn4agFXyhn7hSYosTLNRxQ3UIixyP4Fmv6qPBjQVu8hELVSlThQk/EjA=="
-  "resolved" "https://registry.npmjs.org/aptos/-/aptos-1.3.16.tgz"
-  "version" "1.3.16"
+"aptos@^1.3.14", "aptos@^1.3.16", "aptos@^1.3.17":
+  "integrity" "sha512-SPgWR9D0nHwLNpvxH943T9ieA2/Q0AVVsvT/qTUuWQSImxkxMVkb++XyWhiFyQpnZDqo6o2o0/fZakeUkqrc8w=="
+  "resolved" "https://registry.npmjs.org/aptos/-/aptos-1.3.17.tgz"
+  "version" "1.3.17"
   dependencies:
     "@noble/hashes" "1.1.3"
     "@scure/bip39" "1.1.0"

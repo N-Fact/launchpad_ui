@@ -1,5 +1,6 @@
 import StateProvider from "context/StateProvider";
 import { FC, useContext } from "react";
+import { AptosClient,HexString } from "aptos";
 import Avatar from "shared/Avatar/Avatar";
 import Button from "shared/Button/Button";
 import NcImage from "shared/NcImage/NcImage";
@@ -20,9 +21,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
   let noData;
   const { imageUrl } = useContext(StateProvider);
   const { connected, account, wallet,signAndSubmitTransaction, disconnect, ...rest } = useWallet();
-
   async function sendMintTransaction() {
-
     const transaction = {
       type: "entry_function_payload",
       function: project?.contract_address+`::launcpad_mint::mint_nft`,
@@ -30,6 +29,19 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
       type_arguments: [],
     };
     await signAndSubmitTransaction(transaction);
+  }
+
+  const NODE_URL =  "https://testnet.aptoslabs.com";
+  let counter = "0";
+  async function getCounter() {
+    const client = new AptosClient(NODE_URL);
+      const itWorked = await client.getAccountResource(
+        new HexString(
+            project?.contract_address
+        ),
+        project?.contract_address+"::launcpad_mint::Counter"
+    );
+    console.log(itWorked.data);
   }
 
   if (project?.rounds?.length == 0) {
@@ -163,7 +175,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
                               {round.mintbywallet} Mint per wallet <br /><b> Price: <span className="text-green-600">{round.price} $APT</span></b>
                             </span>
                             <Button className="bg-blue-600 hover:bg-green-700 duration-500 font-semibold rounded-md space" sizeClass="px-6 py-2 " onClick={async () => {
-              await sendMintTransaction();
+              await getCounter();
             }}  >MINT</Button>
 
                           </div>
