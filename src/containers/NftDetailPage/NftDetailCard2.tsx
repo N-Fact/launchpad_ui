@@ -1,5 +1,5 @@
 import StateProvider from "context/StateProvider";
-import { FC, useContext } from "react";
+import { FC, useContext, useEffect } from "react";
 import { AptosClient,HexString } from "aptos";
 import Avatar from "shared/Avatar/Avatar";
 import Button from "shared/Button/Button";
@@ -31,6 +31,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
     };
     await signAndSubmitTransaction(transaction);
   }
+  
 
   const NODE_URL =  "https://testnet.aptoslabs.com";
   async function getCounter() {
@@ -44,6 +45,12 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
     console.log(itWorked.data.i)
     counter = itWorked.data.i;
   }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getCounter();
+    }, 2000);
+    return () => clearInterval(interval);
+  });
 
   if (project?.rounds?.length == 0) {
     noData = (
@@ -176,7 +183,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
                               {round.mintbywallet} Mint per wallet <br /><b> Price: <span className="text-green-600">{round.price} $APT</span></b>
                             </span>
                             <Button className="bg-blue-600 hover:bg-green-700 duration-500 font-semibold rounded-md space" sizeClass="px-6 py-2 " onClick={async () => {
-              await getCounter();
+               await getCounter();
             }}  >MINT</Button>
 
                           </div>
