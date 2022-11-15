@@ -14,6 +14,7 @@ export interface CardLarge2Props {
 }
 
 
+var counter:any;
 const NftDetailCard2: FC<CardLarge2Props> = ({
   className = "",
   project = null,
@@ -32,16 +33,16 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
   }
 
   const NODE_URL =  "https://testnet.aptoslabs.com";
-  let counter = "0";
   async function getCounter() {
     const client = new AptosClient(NODE_URL);
-      const itWorked = await client.getAccountResource(
+      const itWorked :any = await client.getAccountResource(
         new HexString(
             project?.contract_address
         ),
         project?.contract_address+"::launcpad_mint::Counter"
     );
-    console.log(itWorked.data);
+    console.log(itWorked.data.i)
+    counter = itWorked.data.i;
   }
 
   if (project?.rounds?.length == 0) {
@@ -72,7 +73,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
               <div className="mt-4">
                 <div className="flex ">
                   <span className="opacity-75 text-sm">Total minted</span>
-                  <span className=" text-sm text-white ml-auto mr-2 font-semibold">36%</span><span className="opacity-75 text-sm">(720/{project?.total_supply}) </span>
+                  <span className=" text-sm text-white ml-auto mr-2 font-semibold">36%</span><span className="opacity-75 text-sm">({counter+"/"+project?.total_supply}) </span>
                 </div>
                 <div className="mt-1 w-full h-2 bg-red-400 bg-opacity-60 rounded-full ">
                   <div className="w-52 h-2 bg-red-400 rounded-full"></div>
