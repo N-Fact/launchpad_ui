@@ -173,6 +173,9 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
                             <span className="text-xs text-white rounded-full shadow-md bg-slate-800 py-1 px-2 ml-2">
                               Items : {round.item_count}
                             </span>
+                            {round.total_ended_supply > 0 ? <span className="text-xs text-white rounded-full shadow-md bg-slate-800 py-1 px-2 ml-2">
+                              Total minted : {round.total_ended_supply}
+                            </span> : ""}
                             <span className="text-red-400  ml-auto ">
                               ENDED
                             </span>
@@ -221,6 +224,9 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
                               <span className="text-xs text-white rounded-full shadow-md bg-slate-800 py-1 px-2 ml-2">
                                 Items : {round.item_count}
                               </span>
+                              {round.total_ended_supply > 0 ? <span className="text-xs text-white rounded-full shadow-md bg-slate-800 py-1 px-2 ml-2">
+                                Total minted : {round.total_ended_supply}
+                              </span> : ""}
                               <span className="text-red-400  ml-auto ">
                                 ENDED
                               </span>
