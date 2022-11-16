@@ -1,11 +1,11 @@
+import { useWallet } from "@manahippo/aptos-wallet-adapter";
+import { AptosClient, HexString } from "aptos";
 import StateProvider from "context/StateProvider";
-import { FC, useContext, useEffect } from "react";
-import { AptosClient,HexString } from "aptos";
+import { FC, useContext, useEffect, useState } from "react";
 import Avatar from "shared/Avatar/Avatar";
 import Button from "shared/Button/Button";
 import NcImage from "shared/NcImage/NcImage";
 import TimeCountDown from "./TimeCountDown";
-import { useWallet } from "@manahippo/aptos-wallet-adapter";
 
 
 export interface CardLarge2Props {
@@ -14,40 +14,61 @@ export interface CardLarge2Props {
 }
 
 
-var counter:any;
 const NftDetailCard2: FC<CardLarge2Props> = ({
   className = "",
   project = null,
 }) => {
   let noData;
+  const [MintCount, setMintCount] = useState(0);
+  const [mintPercent, setMintPercent] = useState(0);
+  const [mintEnded, setMintEnded] = useState(false);
   const { imageUrl } = useContext(StateProvider);
-  const { connected, account, wallet,signAndSubmitTransaction, disconnect, ...rest } = useWallet();
+  const { connected, account, wallet, signAndSubmitTransaction, disconnect, ...rest } = useWallet();
   async function sendMintTransaction() {
     const transaction = {
       type: "entry_function_payload",
-      function: project?.contract_address+`::launcpad_mint::mint_nft`,
-      arguments: [], 
+      function: project?.contract_address + `::launcpad_mint::mint_nft`,
+      arguments: [],
       type_arguments: [],
     };
     await signAndSubmitTransaction(transaction);
   }
-  
 
-  const NODE_URL =  "https://testnet.aptoslabs.com";
+
+  const NODE_URL = "https://testnet.aptoslabs.com";
   async function getCounter() {
     const client = new AptosClient(NODE_URL);
-      const itWorked :any = await client.getAccountResource(
-        new HexString(
-            project?.contract_address
-        ),
-        project?.contract_address+"::launcpad_mint::Counter"
+    const itWorked: any = await client.getAccountResource(
+      new HexString(
+        project?.contract_address
+      ),
+      project?.contract_address + "::launcpad_mint::Counter"
     );
-    console.log(itWorked.data.i)
-    counter = itWorked.data.i;
+    // console.log(itWorked);
+    // console.log(itWorked.data.i)
+    setMintCount(itWorked.data.i);
+    setMintPercent(((itWorked.data.i / project?.total_supply) * 100))
+    if (itWorked.data.i == project?.total_supply) {
+      setMintEnded(true);
+    }
   }
+
   useEffect(() => {
-    const interval = setInterval(() => {
+
+    if (project?.contract_address) {
       getCounter();
+    }
+
+  }, [project]);
+
+  useEffect(() => {
+
+    const interval = setInterval(() => {
+      if (project?.contract_address) {
+        getCounter();
+
+      }
+
     }, 2000);
     return () => clearInterval(interval);
   });
@@ -80,10 +101,10 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
               <div className="mt-4">
                 <div className="flex ">
                   <span className="opacity-75 text-sm">Total minted</span>
-                  <span className=" text-sm text-white ml-auto mr-2 font-semibold">36%</span><span className="opacity-75 text-sm">({counter+"/"+project?.total_supply}) </span>
+                  <span className=" text-sm text-white ml-auto mr-2 font-semibold">{mintPercent.toFixed(2)}%</span><span className="opacity-75 text-sm">({MintCount + "/" + project?.total_supply}) </span>
                 </div>
                 <div className="mt-1 w-full h-2 bg-red-400 bg-opacity-60 rounded-full ">
-                  <div className="w-52 h-2 bg-red-400 rounded-full"></div>
+                  <div className="h-2 bg-red-400 rounded-full transition-all duration-1000" style={{ width: mintPercent + "%" }}></div>
                 </div>
               </div>
             </div>
@@ -165,30 +186,53 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
                       )
                     } else if (round.status == 1) {
                       // LIVE
-                      return (
-                        <div key={index} className="rounded-2xl gap-6 flex flex-col shadow-md border border-neutral-50 dark:border-neutral-800 hover:bg-zinc-900 duration-500 p-2 lg:p-3 items-start">
-                          <div className="flex w-full">
-                            <span className="text-xs shadow-md text-white rounded-full bg-slate-800 py-1 px-2 capitalize">
-                              {round.name}
-                            </span>
-                            <span className="text-xs shadow-md text-white rounded-full bg-slate-800 py-1 px-2 ml-2">
-                              Items : {round.item_count}
-                            </span>
-                            <span className="text-green-400 ml-auto">
-                              LIVE
-                            </span>
-                          </div>
-                          <div className="flex justify-between w-full items-end">
-                            <span className="font-sm text-base rounded">
-                              {round.mintbywallet} Mint per wallet <br /><b> Price: <span className="text-green-600">{round.price} $APT</span></b>
-                            </span>
-                            <Button className="bg-blue-600 hover:bg-green-700 duration-500 font-semibold rounded-md space" sizeClass="px-6 py-2 " onClick={async () => {
-               await getCounter();
-            }}  >MINT</Button>
+                      if (!mintEnded) {
+                        return (
+                          <div key={index} className="rounded-2xl gap-6 flex flex-col shadow-md border border-neutral-50 dark:border-neutral-800 hover:bg-zinc-900 duration-500 p-2 lg:p-3 items-start">
+                            <div className="flex w-full">
+                              <span className="text-xs shadow-md text-white rounded-full bg-slate-800 py-1 px-2 capitalize">
+                                {round.name}
+                              </span>
+                              <span className="text-xs shadow-md text-white rounded-full bg-slate-800 py-1 px-2 ml-2">
+                                Items : {round.item_count}
+                              </span>
+                              <span className="text-green-400 ml-auto">
+                                LIVE
+                              </span>
+                            </div>
+                            <div className="flex justify-between w-full items-end">
+                              <span className="font-sm text-base rounded">
+                                {round.mintbywallet} Mint per wallet <br /><b> Price: <span className="text-green-600">{round.price} $APT</span></b>
+                              </span>
+                              <Button className="bg-blue-600 hover:bg-green-700 duration-500 font-semibold rounded-md space" sizeClass="px-6 py-2 " onClick={async () => {
+                                project?.contract_address && await getCounter();
+                              }}  >MINT</Button>
 
+                            </div>
                           </div>
-                        </div>
-                      )
+                        )
+                      } else {
+                        return (
+                          <div key={index} className="rounded-2xl gap-6 flex flex-col shadow-md border border-neutral-50 dark:border-neutral-800 hover:bg-zinc-900 duration-500 p-2 lg:p-3 items-start">
+                            <div className="flex w-full">
+                              <span className="text-xs text-white rounded-full shadow-md bg-slate-800 py-1 px-2 capitalize">
+                                {round.name}
+                              </span>
+                              <span className="text-xs text-white rounded-full shadow-md bg-slate-800 py-1 px-2 ml-2">
+                                Items : {round.item_count}
+                              </span>
+                              <span className="text-red-400  ml-auto ">
+                                ENDED
+                              </span>
+                            </div>
+                            <div className="flex justify-between w-full items-end">
+                              <span className="font-sm text-base rounded">
+                                {round.mintbywallet} Mint per wallet <br /><b> Price: <span className="text-green-600">{round.price} $APT</span></b>
+                              </span>
+                            </div>
+                          </div>
+                        )
+                      }
                     } else if (round.status == 2) {
                       // UPCOMING Not Started
                       return (
