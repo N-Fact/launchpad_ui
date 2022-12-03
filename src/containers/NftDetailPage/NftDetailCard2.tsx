@@ -208,7 +208,7 @@ const NftDetailCard2: FC<CardLarge2Props> = ({
                                 {round.mintbywallet} Mint per wallet <br /><b> Price: <span className="text-green-600">{round.price} $APT</span></b>
                               </span>
                               <Button className="bg-blue-600 hover:bg-green-700 duration-500 font-semibold rounded-md space" sizeClass="px-6 py-2 " onClick={async () => {
-                                project?.contract_address && await getCounter();
+                               await sendMintTransaction();
                               }}  >MINT</Button>
 
                             </div>
